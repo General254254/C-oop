@@ -1,6 +1,10 @@
 #include <iostream>
 
-class Employee {
+class AbstractEmployee {
+    virtual void askForPromotion() = 0;
+};
+
+class Employee : AbstractEmployee {
     private:
         std::string Name;
         std::string Company;
@@ -20,6 +24,7 @@ class Employee {
             return Company;
         }
         void setAge(int age) {
+            if(age >= 18)
             Age = age;
         }
         int getAge() {
@@ -36,16 +41,22 @@ class Employee {
             Company  = company;
             Age = age;
         }
+        void askForPromotion() {
+            if (Age >= 30)
+                std::cout << Name << " got promoted!" << std::endl;
+            else
+                std::cout << Name << ", sorry no promotion for you!" << std::endl;
+        }
 };
 
 int main() {
     Employee employee1 = Employee("John", "ABC Corp", 30);
     employee1.introduceyourself();
+    employee1.askForPromotion();
 
     Employee employee2 = Employee("Jane", "XYZ Inc", 25);
     employee2.introduceyourself();
+    employee2.askForPromotion();
 
-    employee1.setAge(31);
-    std::cout << "After birthday, " << employee1.getName() << " is now " << employee1.getAge() << " years old." << std::endl;
     return 0;
 }
