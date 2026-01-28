@@ -48,6 +48,9 @@ class Employee : AbstractEmployee {
             else
                 std::cout << Name << ", sorry no promotion for you!" << std::endl;
         }
+        void work() {
+            std::cout << Name << " is checking email, task backlog, performing tasks..." << std::endl;
+        }
 };
 
 class Developer : public Employee {
@@ -59,6 +62,9 @@ class Developer : public Employee {
         }
         void fixBug() {
             std::cout << Name << " fixed bug using " << FavProgrammingLanguage << std::endl;
+        }
+        void work() {
+            std::cout << Name << " is writing " << FavProgrammingLanguage << " code" << std::endl;
         }
 };
 
@@ -72,6 +78,9 @@ class Teacher : public Employee {
             : Employee(name, company, age) {
                 Subject = subject;
         }
+        void work() {
+            std::cout << Name << " is teaching " << Subject << std::endl;
+        }
 };
 
 int main() {
@@ -79,10 +88,12 @@ int main() {
     d.introduceyourself();
     d.fixBug();
     d.askForPromotion();
+    d.work();
 
     Teacher t = Teacher("Bob", "HighSchool", 35, "Math");
     t.introduceyourself();
     t.prepareLesson();
     t.askForPromotion();
+    t.work();
     return 0;
 }
