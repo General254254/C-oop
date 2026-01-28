@@ -6,9 +6,10 @@ class AbstractEmployee {
 
 class Employee : AbstractEmployee {
     private:
-        std::string Name;
         std::string Company;
         int Age;
+    protected:
+        std::string Name;
     public:
         void setName(std::string name) {
             Name = name;
@@ -49,14 +50,39 @@ class Employee : AbstractEmployee {
         }
 };
 
+class Developer : public Employee {
+    public:
+        std::string FavProgrammingLanguage;
+        Developer(std::string name, std::string company, int age, std::string favProgrammingLanguage)
+            : Employee(name, company, age) {
+                FavProgrammingLanguage = favProgrammingLanguage;
+        }
+        void fixBug() {
+            std::cout << Name << " fixed bug using " << FavProgrammingLanguage << std::endl;
+        }
+};
+
+class Teacher : public Employee {
+    public:
+        std::string Subject;
+        void prepareLesson() {
+            std::cout << Name << " is preparing " << Subject << " lesson" << std::endl;
+        }
+        Teacher(std::string name, std::string company, int age, std::string subject)
+            : Employee(name, company, age) {
+                Subject = subject;
+        }
+};
+
 int main() {
-    Employee employee1 = Employee("John", "ABC Corp", 30);
-    employee1.introduceyourself();
-    employee1.askForPromotion();
+    Developer d = Developer("Alice", "TechCorp", 28, "C++");
+    d.introduceyourself();
+    d.fixBug();
+    d.askForPromotion();
 
-    Employee employee2 = Employee("Jane", "XYZ Inc", 25);
-    employee2.introduceyourself();
-    employee2.askForPromotion();
-
+    Teacher t = Teacher("Bob", "HighSchool", 35, "Math");
+    t.introduceyourself();
+    t.prepareLesson();
+    t.askForPromotion();
     return 0;
 }
